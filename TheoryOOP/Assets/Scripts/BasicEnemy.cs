@@ -5,34 +5,30 @@ using UnityEditor;
 
 public class BasicEnemy : Enemy
 {
-    public float damage = 10f;
     public float fleeDistance = 20f;
     public float chaseDistance = 10f;
-    public float runSpeed = 2;
 
     private bool isPlayerNearby = false;
     private bool isOtherEnemyNearby = false;
     private Vector3 fleeDirection;
     private List<BasicEnemy> nearbyEnemies = new List<BasicEnemy>();
-    private GameObject player;
-    private float currentSpeed;
     
-    private float timeToChangeDirection;
-    private float minTimeToChangeDirection = 3, maxTimeToChangeDirection = 10;
 
     protected override void Start()
     {
         base.Start();
-        player = GameObject.FindGameObjectWithTag("Player");
+        
         // випадково розташовуємо енемів на сцені
         //transform.position = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
     }
 
     void Update()
     {
-        //EnableDisableEnemy();
+        DistanceToPlayer();
+        // якщо гравець не поруч, то енемі рухається випадковим чином
+        Move();
 
-        if(isActiveAndEnabled)
+        if (player != null)
         {
             // перевіряємо, чи знаходиться гравець поруч з енемі
             CheckForPlayer();
@@ -53,23 +49,18 @@ public class BasicEnemy : Enemy
                     ChasePlayerWithOthers();
                 }
             }
-            else
-            {
-                // якщо гравець не поруч, то енемі рухається випадковим чином
-                Move();
-            }
         }
-        
+           
     }
 
     private void CheckForPlayer()
     {
         // перевіряємо, чи знаходиться гравець в межах fleeDistance від енемі
-        if (Vector3.Distance(transform.position, player.transform.position) < fleeDistance)
+        if (distanceToPlayer < fleeDistance)
         {
             isPlayerNearby = true;
         }
-        else if (Vector3.Distance(transform.position, player.transform.position) > chaseDistance)
+        else if (distanceToPlayer > chaseDistance)
         {
             isPlayerNearby = false;
         }
@@ -98,24 +89,7 @@ public class BasicEnemy : Enemy
         transform.position += fleeDirection * runSpeed * Time.deltaTime;
     }
 
-    protected override void Move()
-    {
-        if (currentSpeed == 0f)
-        {
-            currentSpeed = moveSpeed;
-            timeToChangeDirection = Random.Range(minTimeToChangeDirection, maxTimeToChangeDirection);
-        }
-
-        timeToChangeDirection -= Time.deltaTime;
-        if (timeToChangeDirection < 0f)
-        {
-            Vector3 randomDirection = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
-            transform.rotation = Quaternion.LookRotation(randomDirection);
-            timeToChangeDirection = Random.Range(minTimeToChangeDirection, maxTimeToChangeDirection);
-        }
-
-        transform.position += transform.forward * currentSpeed * Time.deltaTime;
-    }
+    
     void ChasePlayerWithOthers()
     {
         Vector3 direction = player.transform.position - transform.position;
@@ -123,18 +97,7 @@ public class BasicEnemy : Enemy
         direction.Normalize();
 
         transform.Translate(direction * runSpeed * Time.deltaTime, Space.World);
-        //player.TakeDamage(damage);
+        StartCoroutine(Attack());
     }
-    //private void EnableDisableEnemy()
-    //{
-    //    float distance = Vector3.Distance(transform.position, player.transform.position);
-    //    if (distance < 100)
-    //    {
-    //        gameObject.SetActive(true);
-    //    }
-    //    else
-    //    {
-    //        gameObject.SetActive(false);
-    //    }
-    //}
+
 }

@@ -9,14 +9,14 @@ public class PlayerController : MonoBehaviour
     public float attackRange = 1f; // дальність атаки плеєра
     public int attackDamage = 1;
     public float attackDelay = 1f; // затримка між атаками плеєра
-    public int health;
+    public int health = 80;
 
-    private Animator animator;
+    //private Animator animator;
     private bool isAttacking;
     private float lastAttackTime;
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         isAttacking = false;
         lastAttackTime = -attackDelay;
     }
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         // рух плеєра
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed;
+        Vector3 movement = new Vector3(verticalInput, 0f, horizontalInput) * moveSpeed;
         transform.Translate(movement * Time.deltaTime, Space.World);
 
         // поворот плеєра
@@ -38,9 +38,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButton(0) && !isAttacking && Time.time - lastAttackTime >= attackDelay)
         {
             isAttacking=true;
-            animator.SetTrigger("attack");
+            //animator.SetTrigger("attack");
             lastAttackTime= Time.time;
             Attack();
+            EndAttack();
         }
     }
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
             if(enemy != null) 
             {
                 enemy.TakeDamage(attackDamage);
+                Debug.Log("Damage " + attackDamage);
             }
         }
     }
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
     }
 
-     public void TakeDamage(int attackDamege)
+     public void TakeDamage(int damage)
     {
         health -= attackDamage;
         if(health <= 0)
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-
+        Debug.Log("Die");
+        Destroy(gameObject);
     }
 }
