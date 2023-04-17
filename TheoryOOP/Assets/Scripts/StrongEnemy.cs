@@ -8,7 +8,6 @@ public class StrongEnemy : Enemy
 {
     // в≥дстань на к≥й ворог починаЇ пересл≥дувати гравц€
     [SerializeField] private float chaseRange = 10f;
-    [SerializeField] private float stopChaseRange = 15f;
 
     protected override void Start()
     {

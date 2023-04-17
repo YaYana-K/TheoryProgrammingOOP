@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         isAttacking = false;
     }
 
-    protected float DistanceToPlayer()
+    public virtual float DistanceToPlayer()
     {
         if (player != null)
         {
