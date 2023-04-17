@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         // рух плеєра
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(verticalInput, 0f, horizontalInput) * moveSpeed;
+        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput) * moveSpeed;
         transform.Translate(movement * Time.deltaTime, Space.World);
 
         // поворот плеєра

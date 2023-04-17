@@ -161,6 +161,7 @@ MonoBehaviour:
   moveSpeed: 1
   runSpeed: 2
   damage: 10
+  attackRange: 2
   fleeDistance: 10
   chaseDistance: 5
 --- !u!135 &63396371
@@ -295,9 +296,8 @@ MonoBehaviour:
   moveSpeed: 5
   runSpeed: 10
   damage: 20
-  chaseRange: 10
-  stopChaseRange: 15
   attackRange: 2
+  chaseRange: 10
 --- !u!135 &229875766
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -430,6 +430,7 @@ MonoBehaviour:
   moveSpeed: 1
   runSpeed: 2
   damage: 10
+  attackRange: 2
   fleeDistance: 10
   chaseDistance: 5
 --- !u!135 &1007923768
@@ -602,8 +603,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018320019}
-  m_LocalRotation: {x: 0.14073804, y: 0.84592533, z: -0.27312973, w: 0.4358937}
-  m_LocalPosition: {x: 940.57764, y: 552.1537, z: -1.5815878}
+  m_LocalRotation: {x: -0.46230957, y: 0.11170596, z: -0.0588478, w: -0.8776837}
+  m_LocalPosition: {x: 946.82605, y: 591.2084, z: -34.624023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -879,9 +880,8 @@ MonoBehaviour:
   moveSpeed: 5
   runSpeed: 10
   damage: 20
-  chaseRange: 10
-  stopChaseRange: 15
   attackRange: 2
+  chaseRange: 10
 --- !u!135 &1080345623
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1014,6 +1014,7 @@ MonoBehaviour:
   moveSpeed: 1
   runSpeed: 2
   damage: 10
+  attackRange: 2
   fleeDistance: 10
   chaseDistance: 5
 --- !u!135 &1382742532
@@ -1148,6 +1149,7 @@ MonoBehaviour:
   moveSpeed: 1
   runSpeed: 2
   damage: 10
+  attackRange: 2
   fleeDistance: 10
   chaseDistance: 5
 --- !u!135 &1603570468
@@ -1282,6 +1284,7 @@ MonoBehaviour:
   moveSpeed: 1
   runSpeed: 2
   damage: 10
+  attackRange: 2
   fleeDistance: 10
   chaseDistance: 5
 --- !u!135 &1706076919
@@ -1416,9 +1419,8 @@ MonoBehaviour:
   moveSpeed: 5
   runSpeed: 10
   damage: 20
-  chaseRange: 10
-  stopChaseRange: 15
   attackRange: 2
+  chaseRange: 10
 --- !u!135 &1927015346
 SphereCollider:
   m_ObjectHideFlags: 0
